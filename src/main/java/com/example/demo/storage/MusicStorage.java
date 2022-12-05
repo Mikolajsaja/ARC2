@@ -12,11 +12,11 @@ public class MusicStorage {
     private final Datastore datastore = DatastoreOptions.getDefaultInstance().getService();
     private final KeyFactory keyFactory = datastore.newKeyFactory().setKind("user");
 
-    public boolean SetMusic (MultipartFile file) throws IOException {
+    public boolean SetMusic (String username, MultipartFile file) throws IOException {
         UploadObjectFromMemory.uploadObjectFromMemory(
                 "arc2-370113",
                 "arc2-370113.appspot.com",
-                "userMusic/",
+                "userMusic" + username,
                 file.getBytes(),
                 file.getContentType());
     return true;

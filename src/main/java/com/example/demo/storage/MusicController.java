@@ -22,7 +22,7 @@ public class MusicController {
     @PostMapping(value = "/setUserData", consumes = MediaType.ALL_VALUE)
     public HttpStatus setUserData(
             @RequestParam("file") MultipartFile file) throws IOException {
-        if (musicStorage.SetMusic(file)) return HttpStatus.OK;
+        if (musicStorage.SetMusic("test", file)) return HttpStatus.OK;
         return HttpStatus.BAD_REQUEST;
     }
 }
