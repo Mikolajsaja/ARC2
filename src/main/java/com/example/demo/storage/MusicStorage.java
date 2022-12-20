@@ -27,7 +27,7 @@ public class MusicStorage {
 
     public void setMusic (MultipartFile file) throws IOException {
         String extension = Objects.requireNonNull(file.getOriginalFilename()).split("\\.")[1];
-        if(extension.equals("audio/mpeg")){
+        if(extension.equals("mp3")){
             Storage storage = StorageOptions.newBuilder().setProjectId("arc2-370113").build().getService();
             BlobInfo blobInfo = BlobInfo.newBuilder(BlobId.of("arc2-370113.appspot.com", "userMusic")).setContentType(extension).build();
             try {
