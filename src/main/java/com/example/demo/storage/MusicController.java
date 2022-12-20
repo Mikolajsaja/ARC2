@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +20,15 @@ public class MusicController {
         this.musicStorage = musicStorage;
     }
 
-    @PostMapping(value = "/setUserData", consumes = MediaType.ALL_VALUE)
-    public HttpStatus setUserData(
+    @PostMapping(value = "/addData", consumes = MediaType.ALL_VALUE)
+    public void setUserData(
             @RequestParam("file") MultipartFile file) throws IOException {
-        if (musicStorage.SetMusic("test", file)) return HttpStatus.OK;
-        return HttpStatus.BAD_REQUEST;
+        musicStorage.setMusic(file);
+    }
+
+
+    @PostMapping("/getFileExtension")
+    public List<String> getFileExtension(){
+        return musicStorage.getFilesExtensions();
     }
 }
