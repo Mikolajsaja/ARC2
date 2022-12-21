@@ -10,6 +10,8 @@ import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 import org.springframework.stereotype.Service;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,7 @@ public class MusicStorage {
         }
     }
 
-    public List<String> getFilesExtensions(){
+    public List<String> getFilesExtensions() throws IOException {
         Storage storage = StorageOptions.getDefaultInstance().getService();
         List<String> extensions = new ArrayList<>();
 
@@ -40,6 +42,14 @@ public class MusicStorage {
         for (Blob blob : blobs.iterateAll()) {
             extensions.add(blob.getContentType());
         }
+//        MultipartFile file = new MockMultipartFile();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        DataOutputStream out = new DataOutputStream(baos);
+        for (String element : extensions) {
+            out.writeUTF(element);
+        }
+        byte[] bytes = baos.toByteArray();
+        this.uploadFileToGcs("arc2-370113", "arc2-370113.appspot.com","extensions",bytes,"txt");
         return extensions;
 
     }

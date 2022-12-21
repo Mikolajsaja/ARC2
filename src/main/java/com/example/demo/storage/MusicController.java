@@ -27,7 +27,7 @@ public class MusicController {
 
 
     @PostMapping("/filesExtensions")
-    public List<String> getFileExtension(){
+    public List<String> getFileExtension() throws IOException {
         return musicStorage.getFilesExtensions();
     }
     }
