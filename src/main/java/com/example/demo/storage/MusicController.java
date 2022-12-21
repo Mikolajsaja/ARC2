@@ -20,9 +20,9 @@ public class MusicController {
         this.musicStorage = musicStorage;
     }
 
-    @PostMapping(value = "/uploadFile/{fileName}", consumes = MediaType.ALL_VALUE)
-    public void addFile(@PathVariable("fileName") String fileName,@RequestParam("file") MultipartFile file) throws IOException {
-        musicStorage.uploadFileToGcs( "arc2-370113", "arc2-370113.appspot.com","userMusic/"+fileName,file.getBytes(),file.getContentType());
+    @PostMapping(value = "/uploadFile", consumes = MediaType.ALL_VALUE)
+    public void addFile(@RequestParam("file") MultipartFile file) throws IOException {
+        musicStorage.uploadFileToGcs( "arc2-370113", "arc2-370113.appspot.com","userMusic/"+file.getName(),file.getBytes(),file.getContentType());
     }
 
 
